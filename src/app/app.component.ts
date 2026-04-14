@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {IProduct, productsList, sumNumbers } from './training';
 @Component({
   selector: 'app-root',
   imports: [],
@@ -9,3 +9,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
 }
+
