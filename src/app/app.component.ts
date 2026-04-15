@@ -9,4 +9,3 @@ import {IProduct, productsList, sumNumbers } from './training';
 export class AppComponent {
 
 }
-

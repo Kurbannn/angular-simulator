@@ -34,7 +34,6 @@ export const productsList: IProduct[] = [
   { id: 3, name: 'Сыр', price: 200 }
 ];
 
-
 export const developersList: IDeveloper[] = [
   {
     id: 1,
