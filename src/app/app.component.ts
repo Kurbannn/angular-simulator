@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IProduct, productsList, sumNumbers } from './training';
+import {IProduct, products, sumNumbers } from './training';
 @Component({
   selector: 'app-root',
   imports: [],
@@ -7,5 +7,4 @@ import {IProduct, productsList, sumNumbers } from './training';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-
 }

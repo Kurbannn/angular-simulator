@@ -9,7 +9,8 @@ export interface IUser {
   name: string;
   surname: string;
   age: number;
-  phone?: string; }
+  phone?: string;
+}
 
 export interface IAdmin extends IUser {
   role: 'superadmin' | 'moderator' | 'support';
@@ -28,13 +29,13 @@ export type UploadStatus = "loading" | "success" | "error";
 export let uploadStatus: UploadStatus;
 export type TextFormat = "uppercase" | "lowercase" | "capitalize";
 export let textFormat: TextFormat;
-export const productsList: IProduct[] = [
+export const products: IProduct[] = [
   { id: 1, name: 'Хлеб', price: 50 },
   { id: 2, name: 'Молоко', price: 80 },
   { id: 3, name: 'Сыр', price: 200 }
 ];
 
-export const developersList: IDeveloper[] = [
+export const developers: IDeveloper[] = [
   {
     id: 1,
     name: "Владислав",
@@ -91,28 +92,26 @@ export function formatString(text: string, format: TextFormat): string {
   }
 }
 
-
 export function removeCharacter(text: string, charToRemove: string): string {
-  const regex = new RegExp(charToRemove, 'g');
-  return text.replace(regex, '');
+  return text.replaceAll(charToRemove, '');
 }
 
 export function filterDevelopersByAge(minAge: number): IDeveloper[] {
-  return developersList.filter(developer => developer.age >= minAge);
+  return developers.filter((developer: IDeveloper): boolean => developer.age >= minAge);
 }
 
 export function filterDevelopersByCity(city: string): IDeveloper[] {
-  return developersList.filter(developer => developer.city === city);
+  return developers.filter((developer: IDeveloper): boolean => developer.city === city);
 }
 
 export function filterDevelopersByName(name: string): IDeveloper[] {
-  return developersList.filter(developer => 
+  return developers.filter((developer: IDeveloper): boolean => 
     developer.name.toLowerCase().includes(name.toLowerCase())
   );
 }
 
 export function filterDevelopersBySurname(surname: string): IDeveloper[] {
-  return developersList.filter(developer => 
+  return developers.filter((developer: IDeveloper): boolean => 
     developer.surname.toLowerCase().includes(surname.toLowerCase())
   );
 }
