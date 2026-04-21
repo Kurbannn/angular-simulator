@@ -1,0 +1,27 @@
+@use './fonts';
+@use './normalize';
+*{
+    font-family: 'Nunito sans';
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white-color: #FFFFFF; 
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
