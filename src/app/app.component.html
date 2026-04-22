@@ -1,57 +1,62 @@
 <header class="header">
   <div class="container-vertex">
     <div class="logo">
-      <a class="logo-container" href="/">
+      <a id="link-logo" class="logo-container" href="/">
         <img src="/image/logo-icon.svg" alt="Логотип Румтибет">
-        <span class="company-name">{{ companyName }}</span>
+        <span id="txt-company-name" class="company-name">{{ companyName }}</span>
       </a>
     </div>
     <nav class="nav-list">
-      <a class="nav-item" href="#main">Главная</a>
-      <a class="nav-item" href="#guide">Про гида</a>
-      <a class="nav-item" href="#program">Программа тура</a>
-      <a class="nav-item" href="#price">Стоимость</a>
-      <a class="nav-item" href="#blog">Блог</a>
-      <a class="nav-item" href="#contacts">Контакты</a>
+      <a id="nav-link-main" class="nav-item" href="#main">Главная</a>
+      <a id="nav-link-guide" class="nav-item" href="#guide">Про гида</a>
+      <a id="nav-link-program" class="nav-item" href="#program">Программа тура</a>
+      <a id="nav-link-price" class="nav-item" href="#price">Стоимость</a>
+      <a id="nav-link-blog" class="nav-item" href="#blog">Блог</a>
+      <a id="nav-link-contacts" class="nav-item" href="#contacts">Контакты</a>
     </nav>
-    <button class="consult-btn btn-general" (click)="openConsultation()">
+    <button id="btn-consultation" class="consult-btn btn-general" (click)="openConsultation()">
       Консультация
     </button>
   </div>
 </header>
+
 <main class="main-section">
   <section class="main-container">
-    <h1 class="main-title">
-      НАСЛАДИСЬ ПРОГУЛКОЙ В ГОРАХ
+    <h1 id="hero-title" class="main-title">
+      Насладись прогулкой в горах
     </h1>
-    <h2 class="main-subtitle">
-      С КОМАНДОЙ ЕДИНОМЫШЛЕННИКОВ
+    <h2 id="hero-subtitle" class="main-subtitle">
+      С командой единомышленников
     </h2>
+
     <div class="select-programm-container">
       <div class="form-group">
-        <button class="drop-btn">
+        <button id="drop-btn-location" class="drop-btn">
           <span>Локация для тура</span>
-          <img src="image/arrow-icon.svg" alt="стрелка вниз" class="field-icon">
+          <img src="image/arrow-icon.svg" alt="стрелка" class="field-icon">
         </button>
         <span class="field-hint">выберите из списка</span>
       </div>
+
       <div class="form-group">
-        <button class="drop-btn">
+        <button id="drop-btn-date" class="drop-btn">
           <span>Дата похода</span>
           <img src="/image/calendar-icon.svg" alt="календарь" class="field-icon">
         </button>
         <span class="field-hint">укажите дату</span>
       </div>
+
       <div class="form-group">
-        <button class="drop-btn">
+        <button id="drop-btn-participants" class="drop-btn">
           <span>Участники</span>
-          <img src="/image/arrow-icon.svg" alt="стрелка вниз" class="field-icon">
+          <img src="/image/arrow-icon.svg" alt="стрелка" class="field-icon">
         </button>
         <span class="field-hint">выберите из списка</span>
       </div>
-      <button class="btn-search" (click)="searchProgram()">
-  Поиск
-</button>
+
+      <button id="btn-search-submit" class="btn-search-programm btn-general" (click)="searchProgram()">
+        Найти программу
+      </button>
     </div>
   </section>
 </main>
