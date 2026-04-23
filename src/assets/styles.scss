@@ -5,23 +5,31 @@
 }
 
 
+:root {
+  --white: #ffffff;
+  --dark-bg: #18121e;
+  --accent-green: #1a3e3e;
+  --transition: all 0.3s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root {
-  --white-color: #FFFFFF; 
-}
-
 body {
-  font-family: 'Nunito Sans', sans-serif;
-  overflow-x: hidden;
+  font-family: 'Inter', sans-serif; 
+  background-color: var(--dark-bg);
+  color: var(--white);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+.btn-general {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }

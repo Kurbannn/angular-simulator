@@ -1,7 +1,5 @@
 export class Collection<T> {
-  
   constructor(private items: T[]) {}
-  
   getAll(): T[] {
     return this.items;
   }
@@ -16,9 +14,9 @@ export class Collection<T> {
 
 remove(index: number): void {
   if (index >= 0 && index < this.items.length) {
-    this.items = this.items.filter((item: T, idx: number) => idx !== index);
-  } else {
-    throw new Error(`Индекс ${index} вне границ коллекции`);
+  this.items = this.items.filter((item: T, idx: number) => idx !== index);
+  } else{
+  throw new Error(`Индекс ${index} вне границ коллекции`);
   }
 }
   replace(index: number, item: T): void {

@@ -14,8 +14,8 @@ import { Collection } from './collection';
 export class AppComponent {
   
   companyName: string = 'РУМТИБЕТ';
-  userList = ['Vladislav', 'Nizam', 'Farukh'];
-  productList = ['Milk', 'Bread', 'Butter'];
+  userList: string[] = ['Vladislav', 'Nizam', 'Farukh'];
+  productList: string[] = ['Milk', 'Bread', 'Butter'];
 
   constructor() {
     this.saveLoginData();
@@ -41,6 +41,4 @@ export class AppComponent {
   openConsultation(): void {
   }
 
-  searchProgram(): void {
-  }
 }
