@@ -1,5 +1,7 @@
 export class Collection<T> {
+ 
   constructor(private items: T[]) {}
+ 
   getAll(): T[] {
     return this.items;
   }
