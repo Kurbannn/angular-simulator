@@ -1,0 +1,35 @@
+@use './fonts';
+@use './normalize';
+*{
+    font-family: 'Nunito sans';
+}
+
+
+:root {
+  --white: #ffffff;
+  --dark-bg: #18121e;
+  --accent-green: #1a3e3e;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif; 
+  background-color: var(--dark-bg);
+  color: var(--white);
+}
+
+.btn-general {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

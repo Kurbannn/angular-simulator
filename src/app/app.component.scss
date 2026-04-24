@@ -1,0 +1,158 @@
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(24, 18, 30, 0.3);
+
+  .container-vertex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1180px;
+    margin: 0 auto;
+    height: 110px;
+    padding: 0 20px;
+  }
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  gap: 8px;
+
+  .company-name {
+    color: var(--white); 
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+  }
+}
+
+.nav-list {
+  display: flex;
+  gap: 25px;
+
+  .nav-item {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+    &:hover { opacity: 1; }
+  }
+}
+
+.consult-btn {
+  background-color: var(--white);
+  color: var(--dark-bg);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover { background-color: rgba(255, 255, 255, 0.9); }
+}
+
+.main-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+              url('/image/mountains-icon.png') no-repeat center center / cover;
+
+  .main-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  .main-title {
+    color: var(--white);
+    font-size: 48px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .main-subtitle {
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+  }
+}
+
+
+.select-programm-container {
+  background: rgba(255, 255, 255, 0.08); 
+  backdrop-filter: blur(15px);
+  padding: 35px 40px;
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; 
+  width: fit-content;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+
+    .drop-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 6px;
+      padding: 0 16px;
+      height: 50px; 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--white);
+      
+      span { font-size: 14px; }
+      .field-icon { 
+        width: 14px; 
+        filter: brightness(0) invert(1); 
+      }
+    }
+
+    .field-hint {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 11px;
+      margin-top: 8px;
+      padding-left: 4px;
+    }
+  }
+
+  .btn-search-programm {
+    background-color: var(--accent-green);
+    color: var(--white);
+    padding: 0 30px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 50px; 
+    &:hover { background-color: #245252; }
+  }
+}
+
+
+@media (max-width: 900px) {
+  .select-programm-container {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    .form-group { width: 100%; }
+    .btn-search-programm { width: 100%; }
+  }
+  .main-title { font-size: 32px; text-align: center; }
+  .main-subtitle { font-size: 18px; text-align: center; }
+}
