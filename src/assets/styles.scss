@@ -4,11 +4,11 @@
     font-family: 'Nunito sans';
 }
 
-
 :root {
-  --white: #ffffff;
+  --white-color: #ffffff;
   --dark-bg: #18121e;
-  --accent-green: #1a3e3e;
+  --main-color: #1a3e3e;
+  --secondery-color: #1a3e3e;
   --transition: all 0.3s ease;
 }
 
@@ -19,9 +19,15 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif; 
+  font-family: 'Nunito Sans', sans-serif;
   background-color: var(--dark-bg);
-  color: var(--white);
+  color: var(--white-color);
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .btn-general {
@@ -32,4 +38,16 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.offers-section,
+.offers-section *,
+.offers-section .feature-title,
+.offers-section .feature-description,
+.offers-section h4,
+.offers-section p {
+  color: #292A2B !important;
+}
+.offers-section .tagline {
+  color: #C6A880 !important;
 }
