@@ -1,62 +1,121 @@
-<header class="header">
-  <div class="container-vertex">
-    <div class="logo">
-      <a id="link-logo" class="logo-container" href="/">
-        <img src="/image/logo-icon.svg" alt="Логотип Румтибет">
-        <span id="txt-company-name" class="company-name">{{ companyName }}</span>
-      </a>
-    </div>
-    <nav class="nav-list">
-      <a id="nav-link-main" class="nav-item" href="#main">Главная</a>
-      <a id="nav-link-guide" class="nav-item" href="#guide">Про гида</a>
-      <a id="nav-link-program" class="nav-item" href="#program">Программа тура</a>
-      <a id="nav-link-price" class="nav-item" href="#price">Стоимость</a>
-      <a id="nav-link-blog" class="nav-item" href="#blog">Блог</a>
-      <a id="nav-link-contacts" class="nav-item" href="#contacts">Контакты</a>
-    </nav>
-    <button id="btn-consultation" class="consult-btn btn-general" (click)="openConsultation()">
-      Консультация
-    </button>
+
+<div [hidden]="!isLoading" class="loader-wrapper">
+  <div class="spinner">
+    <img src="/image/loader-spinner.svg" alt="Загрузка" class="spinner-icon" 
+         onerror="this.style.display='none'">
+    <div class="spinner-fallback"></div>
   </div>
-</header>
-
-<main class="main-section">
-  <section class="main-container">
-    <h1 id="hero-title" class="main-title">
-      Насладись прогулкой в горах
-    </h1>
-    <h2 id="hero-subtitle" class="main-subtitle">
-      С командой единомышленников
-    </h2>
-
-    <div class="select-programm-container">
-      <div class="form-group">
-        <button id="drop-btn-location" class="drop-btn">
-          <span>Локация для тура</span>
-          <img src="image/arrow-icon.svg" alt="стрелка" class="field-icon">
+  <p class="loader-text">Загрузка горных вершин...</p>
+</div>
+<main [hidden]="isLoading">
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo-container" href="/">
+        <img src="/image/logo-icon.svg" alt="Логотип">
+        <span class="company-name">{{ companyName }}</span>
+      </a>
+      <nav class="nav-list">
+        <a class="nav-item" href="#main">Главная</a>
+        <a class="nav-item" href="#guide">Про гида</a>
+        <a class="nav-item" href="#program">Программа</a>
+        <a class="nav-item" href="#contacts">Контакты</a>
+      </nav>
+      <div class="header-widget">
+        <button class="btn-toggle" (click)="toggleWidgetMode()">
+          {{ currentMode === 'date' ? 'Показать счетчик' : 'Показать дату' }}
         </button>
-        <span class="field-hint">выберите из списка</span>
+        <div class="widget-content" *ngIf="currentMode === 'date'">
+          <span class="date-display">{{ currentDate }}</span>
+        </div>
+        <div class="widget-content" *ngIf="currentMode === 'counter'">
+          <button class="btn-control minus" (click)="decrement()" [disabled]="count === 0">−</button>
+          <span class="count-display">{{ count }}</span>
+          <button class="btn-control plus" (click)="increment()">+</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <button id="drop-btn-date" class="drop-btn">
-          <span>Дата похода</span>
-          <img src="/image/calendar-icon.svg" alt="календарь" class="field-icon">
-        </button>
-        <span class="field-hint">укажите дату</span>
-      </div>
-
-      <div class="form-group">
-        <button id="drop-btn-participants" class="drop-btn">
-          <span>Участники</span>
-          <img src="/image/arrow-icon.svg" alt="стрелка" class="field-icon">
-        </button>
-        <span class="field-hint">выберите из списка</span>
-      </div>
-
-      <button id="btn-search-submit" class="btn-search-programm btn-general" (click)="searchProgram()">
-        Найти программу
-      </button>
+      <button class="consult-btn" (click)="openConsultation()">Консультация</button>
     </div>
+  </header>
+  <main class="hero-section" id="main">
+    <div class="container">
+      <h1 class="main-title">
+        НАСЛАДИСЬ ПРОГУЛКОЙ В ГОРАХ<br>
+        С КОМАНДОЙ ЕДИНОМЫШЛЕННИКОВ
+      </h1>
+      <div class="search-panel">
+        <div class="form-group">
+          <select name="location" [(ngModel)]="selectedLocation" class="field-base select-field">
+            <option value="" disabled hidden>Локация для тура</option>
+            <option value="dag">Дагестан</option>
+            <option value="altai">Алтай</option>
+          </select>
+          <span class="field-hint">выберите из списка</span>
+        </div>
+        <div class="form-group">
+          <input name="date" type="date" [(ngModel)]="selectedDate" class="field-base">
+          <span class="field-hint">укажите дату</span>
+        </div>
+
+        <div class="form-group">
+          <select name="members" [(ngModel)]="selectedMembers" class="field-base select-field">
+            <option value="" disabled hidden>Участники</option>
+            <option value="2">2 человека</option>
+            <option value="4">4 человека</option>
+          </select>
+          <span class="field-hint">выберите из списка</span>
+        </div>
+        
+        <button class="btn-search" (click)="searchProgram()" 
+                [disabled]="!selectedLocation || !selectedDate || !selectedMembers">
+          Найти программу
+        </button>
+      </div>
+      <div class="live-input-container">
+        <input class="live-input" type="text" [(ngModel)]="liveInputValue" placeholder="Введите текст...">
+        <p class="live-output">Вы печатаете: <strong>{{ liveInputValue || '...' }}</strong></p>
+      </div>
+
+    </div>
+  </main>
+  <section id="guide" class="explore-section">
+    <div class="container grid-2">
+        <div class="media-stack">
+          <img src="/image/mountai-snow.png" class="img-back" alt="Горы">
+          <div class="img-front-wrapper">
+            <img src="/image/viliage-home.png" class="img-front" alt="Дом">
+            <button class="play-btn"><img src="/image/play-btn.svg" alt="Play"></button>
+          </div>
+        </div>
+        <div class="content-side">
+          <span class="tagline">О НАШЕМ ПОХОДЕ</span>
+          <h2 class="title">Исследуйте все горные массивы мира вместе с нами</h2>
+          <p class="text">Его корни уходят в один фрагмент классической латыни...</p>
+          <a href="#program" class="btn-accent">Программа тура</a>
+        </div>
+    </div>
+  </section>
+  <section id="program" class="offers-section">
+     <div class="container grid-2">
+        <div class="content-side">
+          <span class="tagline">НАШЕ ПРЕДЛОЖЕНИЕ</span>
+          <h2 class="title">Лучшие программы для тебя</h2>
+          <div class="offers-list">
+            @for (card of programCards; track card.id) {
+              <div class="offer-item">
+                <div class="icon-box"><img [src]="card.image" [alt]="card.title"></div>
+                <div class="info"><h4>{{ card.title }}</h4><p>{{ card.description }}</p></div>
+              </div>
+            }
+          </div>
+          <button class="btn-accent">Стоимость программ</button>
+        </div>
+        <div class="collage-grid">
+          <img src="/image/lake-glass.png" alt="Glass">
+          <img src="/image/big-cliff.png" alt="Cliff">
+          <img src="/image/snow-scooter.png" alt="Scooter">
+          <img src="/image/red-river.png" alt="River">
+        </div>
+     </div>
   </section>
 </main>
