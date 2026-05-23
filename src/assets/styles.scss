@@ -7,10 +7,14 @@
 :root {
   --white-color: #ffffff;
   --dark-bg: #18121e;
-  --main-color: #1a3e3e;
-  --secondery-color: #1a3e3e;
+  --main-color: #1a3e3e; 
+  --accent-orange: #f2aa4c; 
+  --gray-dark: #333333; 
+  --gray-text: #666666; 
+  --form-bg: rgba(255, 255, 255, 0.08);
   --transition: all 0.3s ease;
 }
+
 
 * {
   margin: 0;

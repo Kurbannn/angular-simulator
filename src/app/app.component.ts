@@ -2,6 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+interface ProgramCard {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+}
+
+type WidgetMode = 'date' | 'counter';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,74 +20,107 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent implements OnInit, OnDestroy {
   
-  isLoading: boolean = true;
- 
-  currentMode: 'date' | 'counter' = 'date'; 
+
   
-  currentDate: string = '';
-  private timerInterval: any;
-
-  count: number = 0;
-
-  liveInputValue: string = '';
-
-  selectedLocation: string = '';
-  selectedDate: string = '';
-  selectedMembers: string = '';
-  companyName: string = 'РУМТИБЕТ';
-
-  programCards = [
-    { id: 1, title: 'Опытный гид', image: '/image/expert-guide.svg', description: 'Гид с опытом .' },
-    { id: 2, title: 'Безопасность', image: '/image/safe-hiking.svg', description: 'безопасная цена.' },
-    { id: 3, title: 'Комфорт', image: '/image/loyal-prices.svg', description: 'лояльная цена.' }
+  public isLoading: boolean = true;
+  public currentMode: WidgetMode = 'date';
+  public currentDate: string = '';
+  public count: number = 0;
+  public liveInputValue: string = '';
+  public selectedLocation: string = '';
+  public selectedDate: string = '';
+  public selectedMembers: string = '';
+  public companyName: string = 'РУМТИБЕТ';
+  
+  public programCards: ProgramCard[] = [
+    { 
+      id: 1, 
+      title: 'Опытный гид', 
+      image: '/image/expert-guide.svg', 
+      description: 'Гид с опытом.' 
+    },
+    { 
+      id: 2, 
+      title: 'Безопасность', 
+      image: '/image/safe-hiking.svg', 
+      description: 'безопасная цена.' 
+    },
+    { 
+      id: 3, 
+      title: 'Комфорт', 
+      image: '/image/loyal-prices.svg', 
+      description: 'лояльная цена.' 
+    }
   ];
-
-  ngOnInit(): void {
   
+  
+  private timerInterval: number | undefined;
+  
+
+  public ngOnInit(): void {
     this.updateDate();
-    this.timerInterval = setInterval(() => {
-      this.updateDate();
-    }, 1000);
-
-    
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+    this.startTimer();
+    this.simulateLoading();
+  }
+  
+  public ngOnDestroy(): void {
+    this.stopTimer();
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.timerInterval);
-  }
-
- 
-  private updateDate(): void {
-    const now = new Date();
-    this.currentDate = now.toLocaleDateString('ru-RU', {
-      day: 'numeric', month: 'long', year: 'numeric'
-    }) + ', ' + now.toLocaleTimeString('ru-RU');
-  }
-
- 
-  toggleWidgetMode(): void {
+  
+  public toggleWidgetMode(): void {
     this.currentMode = this.currentMode === 'date' ? 'counter' : 'date';
   }
-
- 
-  increment(): void {
+  
+  public increment(): void {
     this.count++;
   }
-
-  decrement(): void {
+  
+  public decrement(): void {
     if (this.count > 0) {
       this.count--;
     }
   }
-
-  searchProgram(): void {
-    console.log('Поиск:', this.selectedLocation, this.selectedDate, this.selectedMembers);
+  
+  public searchProgram(): void {
+    console.log('Поиск:', {
+      location: this.selectedLocation,
+      date: this.selectedDate,
+      members: this.selectedMembers
+    });
   }
   
-  openConsultation(): void {
+  public openConsultation(): void {
     console.log('Открыть консультацию');
+  }
+  
+
+  private updateDate(): void {
+    const now: Date = new Date();
+    const dateString: string = now.toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    const timeString: string = now.toLocaleTimeString('ru-RU');
+    this.currentDate = `${dateString}, ${timeString}`;
+  }
+  
+  private startTimer(): void {
+    this.timerInterval = setInterval((): void => {
+      this.updateDate();
+    }, 1000);
+  }
+  
+  private stopTimer(): void {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+    }
+  }
+  
+  private simulateLoading(): void {
+    setTimeout((): void => {
+      this.isLoading = false;
+    }, 2000);
   }
 }
