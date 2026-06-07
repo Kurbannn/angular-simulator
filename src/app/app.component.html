@@ -128,7 +128,7 @@
           @for (card of programCards; track card.id) {
             <div class="offer-item">
               <div class="icon-box">
-                <img [src]="card.image" [alt]="card.title">
+                <img [src]="'/image/' + card.image" [alt]="card.title">
               </div>
               <div class="info">
                 <h4>{{ card.title }}</h4>

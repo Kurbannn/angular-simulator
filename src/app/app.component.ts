@@ -2,14 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-interface ProgramCard {
-  id: number;
-  title: string;
-  image: string;
-  description: string;
-}
-
-type WidgetMode = 'date' | 'counter';
+import { ProgramCard } from './program-card.interface';
+import { WidgetMode } from './widget-mode.type';
 
 @Component({
   selector: 'app-root',
@@ -19,95 +13,81 @@ type WidgetMode = 'date' | 'counter';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+  isLoading = true;
+  currentMode: WidgetMode = 'date';
+  currentDate = '';
+  count = 0;
+  liveInputValue = '';
+  selectedLocation = '';
+  selectedDate = '';
+  selectedMembers = '';
+  companyName = 'РУМТИБЕТ';
   
-
   
-  public isLoading: boolean = true;
-  public currentMode: WidgetMode = 'date';
-  public currentDate: string = '';
-  public count: number = 0;
-  public liveInputValue: string = '';
-  public selectedLocation: string = '';
-  public selectedDate: string = '';
-  public selectedMembers: string = '';
-  public companyName: string = 'РУМТИБЕТ';
-  
-  public programCards: ProgramCard[] = [
+  programCards: ProgramCard[] = [
     { 
       id: 1, 
       title: 'Опытный гид', 
-      image: '/image/expert-guide.svg', 
+      image: 'expert-guide.svg', 
       description: 'Гид с опытом.' 
     },
     { 
       id: 2, 
       title: 'Безопасность', 
-      image: '/image/safe-hiking.svg', 
+      image: 'safe-hiking.svg', 
       description: 'безопасная цена.' 
     },
     { 
       id: 3, 
       title: 'Комфорт', 
-      image: '/image/loyal-prices.svg', 
+      image: 'loyal-prices.svg', 
       description: 'лояльная цена.' 
     }
   ];
   
+  private timerInterval: any;
   
-  private timerInterval: number | undefined;
-  
-
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.updateDate();
     this.startTimer();
     this.simulateLoading();
   }
   
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.stopTimer();
   }
 
-  
-  public toggleWidgetMode(): void {
+  toggleWidgetMode(): void {
     this.currentMode = this.currentMode === 'date' ? 'counter' : 'date';
   }
   
-  public increment(): void {
+  increment(): void {
     this.count++;
   }
   
-  public decrement(): void {
+  decrement(): void {
     if (this.count > 0) {
       this.count--;
     }
   }
   
-  public searchProgram(): void {
-    console.log('Поиск:', {
-      location: this.selectedLocation,
-      date: this.selectedDate,
-      members: this.selectedMembers
-    });
-  }
+  searchProgram(): void {}
   
-  public openConsultation(): void {
-    console.log('Открыть консультацию');
-  }
+  openConsultation(): void {}
   
-
   private updateDate(): void {
-    const now: Date = new Date();
-    const dateString: string = now.toLocaleDateString('ru-RU', {
+    const now = new Date();
+    const dateString = now.toLocaleDateString('ru-RU', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     });
-    const timeString: string = now.toLocaleTimeString('ru-RU');
+    const timeString = now.toLocaleTimeString('ru-RU');
     this.currentDate = `${dateString}, ${timeString}`;
   }
   
   private startTimer(): void {
-    this.timerInterval = setInterval((): void => {
+    this.timerInterval = setInterval(() => {
       this.updateDate();
     }, 1000);
   }
@@ -119,7 +99,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   
   private simulateLoading(): void {
-    setTimeout((): void => {
+    setTimeout(() => {
       this.isLoading = false;
     }, 2000);
   }
