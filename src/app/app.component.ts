@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { ProgramCard } from './program-card.interface';
 import { WidgetMode } from './widget-mode.type';
 
@@ -13,16 +12,15 @@ import { WidgetMode } from './widget-mode.type';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  isLoading = true;
+  isLoading: boolean = true;
   currentMode: WidgetMode = 'date';
-  currentDate = '';
-  count = 0;
-  liveInputValue = '';
-  selectedLocation = '';
-  selectedDate = '';
-  selectedMembers = '';
-  companyName = 'РУМТИБЕТ';
-  
+  currentDate: string = '';
+  count: number = 0;
+  liveInputValue: string = '';
+  selectedLocation: string = '';
+  selectedDate: string = '';
+  selectedMembers: string = '';
+  companyName: string = 'РУМТИБЕТ';
   
   programCards: ProgramCard[] = [
     { 
@@ -45,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   ];
   
-  private timerInterval: any;
+  private timerInterval: number | undefined;
   
   ngOnInit(): void {
     this.updateDate();
@@ -71,23 +69,27 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
   
-  searchProgram(): void {}
+  searchProgram(): void {
   
-  openConsultation(): void {}
+  }
+  
+  openConsultation(): void {
+  
+  }
   
   private updateDate(): void {
-    const now = new Date();
-    const dateString = now.toLocaleDateString('ru-RU', {
+    const now: Date = new Date();
+    const dateString: string = now.toLocaleDateString('ru-RU', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     });
-    const timeString = now.toLocaleTimeString('ru-RU');
+    const timeString: string = now.toLocaleTimeString('ru-RU');
     this.currentDate = `${dateString}, ${timeString}`;
   }
   
   private startTimer(): void {
-    this.timerInterval = setInterval(() => {
+    this.timerInterval = window.setInterval((): void => {
       this.updateDate();
     }, 1000);
   }
@@ -99,7 +101,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   
   private simulateLoading(): void {
-    setTimeout(() => {
+    window.setTimeout((): void => {
       this.isLoading = false;
     }, 2000);
   }

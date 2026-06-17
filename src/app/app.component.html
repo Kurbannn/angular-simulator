@@ -7,9 +7,7 @@
     </div>
     <p class="loader-text">Загрузка горных вершин...</p>
   </div>
-}
-
-@if (!isLoading) {
+} @else {
   <header class="header">
     <div class="container header-inner">
       <a id="link-logo" class="logo-container" href="/">
@@ -83,11 +81,6 @@
                 [disabled]="!selectedLocation || !selectedDate || !selectedMembers">
           Найти программу
         </button>
-      </div>
-
-      <div class="live-input-container">
-        <input id="input-live-demo" class="live-input" type="text" [(ngModel)]="liveInputValue" placeholder="Введите текст...">
-        <p class="live-output">Вы печатаете: <strong>{{ liveInputValue || '...' }}</strong></p>
       </div>
     </div>
   </div>

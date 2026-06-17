@@ -1,1 +1,1 @@
-export type WidgetMode = 'date' | 'counter';  
+export type WidgetMode = 'date' | 'counter';  10
