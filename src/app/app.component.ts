@@ -33,13 +33,13 @@ export class AppComponent implements OnInit, OnDestroy {
       id: 2, 
       title: 'Безопасность', 
       image: 'safe-hiking.svg', 
-      description: 'безопасная цена.' 
+      description: 'Безопасная цена.' 
     },
     { 
       id: 3, 
       title: 'Комфорт', 
       image: 'loyal-prices.svg', 
-      description: 'лояльная цена.' 
+      description: 'Лояльная цена.' 
     }
   ];
   
@@ -69,14 +69,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
   
-  searchProgram(): void {
-  
-  }
-  
-  openConsultation(): void {
-  
-  }
-  
   private updateDate(): void {
     const now: Date = new Date();
     const dateString: string = now.toLocaleDateString('ru-RU', {
@@ -89,7 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   
   private startTimer(): void {
-    this.timerInterval = window.setInterval((): void => {
+    this.timerInterval = setInterval(() => {
       this.updateDate();
     }, 1000);
   }
@@ -101,7 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   
   private simulateLoading(): void {
-    window.setTimeout((): void => {
+    setTimeout(() => {
       this.isLoading = false;
     }, 2000);
   }

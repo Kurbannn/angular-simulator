@@ -42,7 +42,7 @@
         }
       </div>
 
-      <button id="btn-consultation" class="consult-btn" (click)="openConsultation()">Консультация</button>
+      <button id="btn-consultation" class="consult-btn">Консультация</button>
     </div>
   </header>
 
@@ -77,7 +77,7 @@
           <span class="field-hint">выберите из списка</span>
         </div>
 
-        <button id="btn-search-submit" class="btn-search" (click)="searchProgram()" 
+        <button id="btn-search-submit" class="btn-search" 
                 [disabled]="!selectedLocation || !selectedDate || !selectedMembers">
           Найти программу
         </button>
