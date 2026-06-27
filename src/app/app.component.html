@@ -1,62 +1,145 @@
-<header class="header">
-  <div class="container-vertex">
-    <div class="logo">
+@if (isLoading) {
+  <div class="loader-wrapper">
+    <div class="spinner">
+      <img src="/image/loader-spinner.svg" alt="Загрузка" class="spinner-icon" 
+           onerror="this.style.display='none'">
+      <div class="spinner-fallback"></div>
+    </div>
+    <p class="loader-text">Загрузка горных вершин...</p>
+  </div>
+} @else {
+  <header class="header">
+    <div class="container header-inner">
       <a id="link-logo" class="logo-container" href="/">
-        <img src="/image/logo-icon.svg" alt="Логотип Румтибет">
+        <img src="/image/logo-icon.svg" alt="Логотип">
         <span id="txt-company-name" class="company-name">{{ companyName }}</span>
       </a>
+      
+      <nav class="nav-list">
+        <a id="nav-link-main" class="nav-item" href="#main">Главная</a>
+        <a id="nav-link-guide" class="nav-item" href="#guide">Про гида</a>
+        <a id="nav-link-program" class="nav-item" href="#program">Программа</a>
+        <a id="nav-link-contacts" class="nav-item" href="#contacts">Контакты</a>
+      </nav>
+      
+      <div class="header-widget">
+        <button id="btn-widget-toggle" class="btn-toggle" (click)="toggleWidgetMode()">
+          {{ currentMode === 'date' ? 'Показать счетчик' : 'Показать дату' }}
+        </button>
+        
+        @if (currentMode === 'date') {
+          <div class="widget-content">
+            <span class="date-display">{{ currentDate }}</span>
+          </div>
+        }
+        
+        @if (currentMode === 'counter') {
+          <div class="widget-content">
+            <button id="btn-counter-minus" class="btn-control minus" (click)="decrement()" [disabled]="count === 0">−</button>
+            <span class="count-display">{{ count }}</span>
+            <button id="btn-counter-plus" class="btn-control plus" (click)="increment()">+</button>
+          </div>
+        }
+      </div>
+
+      <button id="btn-consultation" class="consult-btn">Консультация</button>
     </div>
-    <nav class="nav-list">
-      <a id="nav-link-main" class="nav-item" href="#main">Главная</a>
-      <a id="nav-link-guide" class="nav-item" href="#guide">Про гида</a>
-      <a id="nav-link-program" class="nav-item" href="#program">Программа тура</a>
-      <a id="nav-link-price" class="nav-item" href="#price">Стоимость</a>
-      <a id="nav-link-blog" class="nav-item" href="#blog">Блог</a>
-      <a id="nav-link-contacts" class="nav-item" href="#contacts">Контакты</a>
-    </nav>
-    <button id="btn-consultation" class="consult-btn btn-general" (click)="openConsultation()">
-      Консультация
-    </button>
+  </header>
+
+  <div class="hero-section" id="main">
+    <div class="container">
+      <h1 id="hero-title" class="main-title">
+        Насладись прогулкой в горах<br>
+        С командой единомышленников
+      </h1>
+
+      <div class="search-panel">
+        <div class="form-group">
+          <select id="select-location" name="location" [(ngModel)]="selectedLocation" class="field-base select-field">
+            <option value="" disabled hidden>Локация для тура</option>
+            <option value="dag">Дагестан</option>
+            <option value="altai">Алтай</option>
+          </select>
+          <span class="field-hint">выберите из списка</span>
+        </div>
+
+        <div class="form-group">
+          <input id="input-date" name="date" type="date" [(ngModel)]="selectedDate" class="field-base">
+          <span class="field-hint">укажите дату</span>
+        </div>
+
+        <div class="form-group">
+          <select id="select-members" name="members" [(ngModel)]="selectedMembers" class="field-base select-field">
+            <option value="" disabled hidden>Участники</option>
+            <option value="2">2 человека</option>
+            <option value="4">4 человека</option>
+          </select>
+          <span class="field-hint">выберите из списка</span>
+        </div>
+
+        <button id="btn-search-submit" class="btn-search" 
+                [disabled]="!selectedLocation || !selectedDate || !selectedMembers">
+          Найти программу
+        </button>
+      </div>
+    </div>
   </div>
-</header>
 
-<main class="main-section">
-  <section class="main-container">
-    <h1 id="hero-title" class="main-title">
-      Насладись прогулкой в горах
-    </h1>
-    <h2 id="hero-subtitle" class="main-subtitle">
-      С командой единомышленников
-    </h2>
-
-    <div class="select-programm-container">
-      <div class="form-group">
-        <button id="drop-btn-location" class="drop-btn">
-          <span>Локация для тура</span>
-          <img src="image/arrow-icon.svg" alt="стрелка" class="field-icon">
-        </button>
-        <span class="field-hint">выберите из списка</span>
+  <section id="guide" class="explore-section">
+    <div class="container grid-2">
+      <div class="media-stack">
+        <img src="/image/mountai-snow.png" class="img-back" alt="Горы">
+        <div class="img-front-wrapper">
+          <img src="/image/viliage-home.png" class="img-front" alt="Дом">
+          <button id="btn-video-play" class="play-btn">
+            <img src="/image/play-btn.svg" alt="Play">
+          </button>
+        </div>
       </div>
-
-      <div class="form-group">
-        <button id="drop-btn-date" class="drop-btn">
-          <span>Дата похода</span>
-          <img src="/image/calendar-icon.svg" alt="календарь" class="field-icon">
-        </button>
-        <span class="field-hint">укажите дату</span>
+      <div class="content-side">
+        <span class="tagline">О НАШЕМ ПОХОДЕ</span>
+        <h2 class="title">Исследуйте все горные массивы мира вместе с нами</h2>
+        <p class="text">
+          Его корни уходят в один фрагмент классической латыни 45 года н.э., 
+          то есть более двух тысячелетий назад. Ричард МакКлинток, профессор 
+          латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых 
+          странных слов в Lorem Ipsum, "consectetuer", и нашел его упоминание 
+          в классической латинской литературе.
+        </p>
+        <a id="link-explore-program" href="#program" class="btn-accent">Программа тура</a>
       </div>
-
-      <div class="form-group">
-        <button id="drop-btn-participants" class="drop-btn">
-          <span>Участники</span>
-          <img src="/image/arrow-icon.svg" alt="стрелка" class="field-icon">
-        </button>
-        <span class="field-hint">выберите из списка</span>
-      </div>
-
-      <button id="btn-search-submit" class="btn-search-programm btn-general" (click)="searchProgram()">
-        Найти программу
-      </button>
     </div>
   </section>
-</main>
+
+  <section id="program" class="offers-section">
+    <div class="container grid-2">
+      <div class="content-side">
+        <span class="tagline">НАШЕ ПРЕДЛОЖЕНИЕ</span>
+        <h2 class="title">Лучшие программы для тебя</h2>
+        
+        <div class="offers-list">
+          @for (card of programCards; track card.id) {
+            <div class="offer-item">
+              <div class="icon-box">
+                <img [src]="'/image/' + card.image" [alt]="card.title">
+              </div>
+              <div class="info">
+                <h4>{{ card.title }}</h4>
+                <p>{{ card.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+        
+        <button id="btn-show-prices" class="btn-accent">Стоимость программы</button>
+      </div>
+      
+      <div class="collage-grid">
+        <img src="/image/lake-glass.png" alt="Lake with cup">
+        <img src="/image/big-cliff.png" alt="Canyon">
+        <img src="/image/snow-scooter.png" alt="Snow scooter">
+        <img src="/image/red-river.png" alt="Red river">
+      </div>
+    </div>
+  </section>
+}

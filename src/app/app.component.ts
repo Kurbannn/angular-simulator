@@ -1,44 +1,100 @@
-import './training';
-import { Component } from '@angular/core';
-import { Color } from '../enums/Color';
-import './collection';
-import { Collection } from './collection';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ProgramCard } from './program-card.interface';
+import { WidgetMode } from './widget-mode.type';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss']
 })
-
-export class AppComponent {
-  
+export class AppComponent implements OnInit, OnDestroy {
+  isLoading: boolean = true;
+  currentMode: WidgetMode = 'date';
+  currentDate: string = '';
+  count: number = 0;
+  liveInputValue: string = '';
+  selectedLocation: string = '';
+  selectedDate: string = '';
+  selectedMembers: string = '';
   companyName: string = 'РУМТИБЕТ';
-  userList: string[] = ['Vladislav', 'Nizam', 'Farukh'];
-  productList: string[] = ['Milk', 'Bread', 'Butter'];
-
-  constructor() {
-    this.saveLoginData();
-    this.updateLoginCount();
+  
+  programCards: ProgramCard[] = [
+    { 
+      id: 1, 
+      title: 'Опытный гид', 
+      image: 'expert-guide.svg', 
+      description: 'Гид с опытом.' 
+    },
+    { 
+      id: 2, 
+      title: 'Безопасность', 
+      image: 'safe-hiking.svg', 
+      description: 'Безопасная цена.' 
+    },
+    { 
+      id: 3, 
+      title: 'Комфорт', 
+      image: 'loyal-prices.svg', 
+      description: 'Лояльная цена.' 
+    }
+  ];
+  
+  private timerInterval: number | undefined;
+  
+  ngOnInit(): void {
+    this.updateDate();
+    this.startTimer();
+    this.simulateLoading();
   }
   
-  isMainColor(color: Color): boolean {
-    const rgb: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
-    return rgb.includes(color);
+  ngOnDestroy(): void {
+    this.stopTimer();
   }
 
-  private saveLoginData(): void {
-    const date: string = new Date().toISOString();
-    localStorage.setItem('last-visit', date);
+  toggleWidgetMode(): void {
+    this.currentMode = this.currentMode === 'date' ? 'counter' : 'date';
   }
-
-  private updateLoginCount(): void {
-    let visits: number = parseInt(localStorage.getItem('visit-count') || '0', 10);
-    visits = visits + 1;
-    localStorage.setItem('visit-count', visits.toString());
+  
+  increment(): void {
+    this.count++;
   }
-
-  openConsultation(): void {
+  
+  decrement(): void {
+    if (this.count > 0) {
+      this.count--;
+    }
   }
-
+  
+  private updateDate(): void {
+    const now: Date = new Date();
+    const dateString: string = now.toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    const timeString: string = now.toLocaleTimeString('ru-RU');
+    this.currentDate = `${dateString}, ${timeString}`;
+  }
+  
+  private startTimer(): void {
+    this.timerInterval = setInterval(() => {
+      this.updateDate();
+    }, 1000);
+  }
+  
+  private stopTimer(): void {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+    }
+  }
+  
+  private simulateLoading(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  }
 }
