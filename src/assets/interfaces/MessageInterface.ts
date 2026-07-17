@@ -1,4 +1,4 @@
-import { MessageType } from './message-type.enum';
+import { MessageType } from '../../enums/MessageType.enum';
 
 export interface Message {
   id: number;

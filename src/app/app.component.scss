@@ -740,6 +740,7 @@ img {
   to { transform: translateX(0); opacity: 1; }
 }
 
+// ========== АДАПТИВНОСТЬ ==========
 @media (max-width: 992px) {
   .container { max-width: 720px; }
   .grid-2 { grid-template-columns: 1fr; gap: 40px; }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Message } from './message.interface';
-import { MessageType } from './message-type.enum';
+import { Message } from '../interfaces/MessageInterface';
+import { MessageType } from '../../enums/MessageType.enum';
 
 @Injectable({
   providedIn: 'root'
