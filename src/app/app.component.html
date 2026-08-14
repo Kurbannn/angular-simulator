@@ -69,6 +69,7 @@
             id="select-location" 
             name="location" 
             [(ngModel)]="selectedLocation" 
+            (change)="saveFormState()"
             class="field-base select-field">
             <option value="" disabled hidden>Локация для тура</option>
             <option value="dag">Дагестан</option>
@@ -83,6 +84,7 @@
             name="date" 
             type="date" 
             [(ngModel)]="selectedDate" 
+            (change)="saveFormState()"
             class="field-base">
           <span class="field-hint">укажите дату</span>
         </div>
@@ -92,6 +94,7 @@
             id="select-members" 
             name="members" 
             [(ngModel)]="selectedMembers" 
+            (change)="saveFormState()"
             class="field-base select-field">
             <option value="" disabled hidden>Участники</option>
             <option value="2">2 человека</option>
@@ -146,7 +149,7 @@
           @for (card of programCards; track card.id) {
             <div class="offer-item">
               <div class="icon-box">
-                <img [src]="'/image/' + card.image" [alt]="card.title">
+                <img [src]="'/image/' + card.image + '.svg'" [alt]="card.title">
               </div>
               <div class="info">
                 <h4>{{ card.title }}</h4>
@@ -177,7 +180,7 @@
 
       <div class="destinations-grid">
         @for (item of destinations; track item.id) {
-          <div class="destination-card" [style.background-image]="'url(/image/' + item.image + ')'">
+          <div class="destination-card" [style.background-image]="'url(/image/' + item.image + '.jpg)'">
             <div class="card-rating">
               <img class="star-icon" src="/star-rating.svg" alt="Рейтинг">
               {{ item.rating | number:'1.1-1' }}
@@ -211,7 +214,7 @@
           <div class="blog-card" (click)="openArticle(article.title)">
             <div 
               class="blog-card-img" 
-              [style.background-image]="'url(/image/' + article.image + ')'">
+              [style.background-image]="'url(/image/' + article.image + '.jpg)'">
             </div>
             <div class="blog-card-content">
               <h3 class="blog-card-title">{{ article.title }}</h3>
