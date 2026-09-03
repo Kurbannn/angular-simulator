@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IProgramCard, IDestinationCard, IBlogArticle } from '../app/Cardsmodels';
+import { IProgramCard } from './IProgramCard';
+import { IDestinationCard } from './IDestinationCard';
+import { IBlogArticl } from './IBlogArticl';
 import { MessageService } from '../assets/services/MessageService';
 import { LocalStorageService } from '../assets/services/LocalStorageService';
 import { IMessage } from '../assets/services/IMessage';
@@ -85,7 +87,7 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  blogArticles: IBlogArticle[] = [
+  blogArticles: IBlogArticl[] = [
     {
       id: 1,
       title: 'Красивая Италия, какая она в реальности?',
@@ -152,7 +154,7 @@ export class AppComponent implements OnInit {
   }
 
   showRatingAlert(): void {
-    this.messageService.addMessage('Рейтинг успешно обновлен!', MessageType.Success);
+    this.messageService.addMessage('Рейтинг успешно обновлен!', MessageType.SUCCESS);
   }
 
   openArticle(title: string): void {
